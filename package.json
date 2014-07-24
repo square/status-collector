@@ -1,0 +1,32 @@
+{
+  "name": "status-collector",
+  "version": "0.1.0",
+  "description": "A simple named collector module intended for collection of status on demand for multiple aspects of your application",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git remote add origin ssh://git@git.corp.squareup.com/js/status-collector.git"
+  },
+  "keywords": [
+    "status"
+  ],
+  "dependencies": {
+    "minimatch": "0.4.0",
+    "q": "*",
+    "lodash": "*"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*",
+    "sinon": "~1.8.1",
+    "sinon-chai": "~2.5.0"
+  },
+  "publishConfig": {
+    "registry": "http://npm.corp.squareup.com:8000"
+  },
+  "author": "Daniel Neighman",
+  "license": "ISC"
+}
