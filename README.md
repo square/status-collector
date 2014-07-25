@@ -45,8 +45,18 @@ We can filter the things to run:
 
 Add the following to your express app
 
-    myApp.use(collectors.expressApp());
+    myApp.use(collectors.expressApp("/my-base-path", express()));
 
 Then hit it:
 
-    curl -k -vv  "http://localhost:4567/status/status-collector"
+    curl -k -vv  "http://localhost:4567/my-base-path-list"
+    curl -k -vv  "http://localhost:4567/my-base-path"
+
+When you have something to test, lets say "my.thing.yeah"
+
+    curl -k -vv  "http://localhost:4567/my-base-path/my"
+    curl -k -vv  "http://localhost:4567/my-base-path/my/thing"
+    curl -k -vv  "http://localhost:4567/my-base-path/my/thing/yeah"
+    curl -k -vv  "http://localhost:4567/my-base-path/my.*"
+
+
