@@ -10,11 +10,11 @@ It allows you to setup topographically named collectors that can be filtered by 
     > Q = require('q');
     > inspect = require('util').inspect;
 
-    collectors.register('my.cool.collector', function() { return { success: true, stuff: 'and', things: true }; });
-    collectors.register('my.ace.collector', function() { return Q().then(function() { return { success: true, woa: 'crazy'}; }); });
+    collectors.register('my/cool/collector', function() { return { success: true, stuff: 'and', things: true }; });
+    collectors.register('my/ace/collector', function() { return Q().then(function() { return { success: true, woa: 'crazy'}; }); });
 
     > collectors
-    <StatusCollector collectors=[my.ace.collector, my.cool.collector]>
+    <StatusCollector collectors=[my/ace/collector, my/cool/collector]>
 
 Now to use them.
 
@@ -23,7 +23,7 @@ Now to use them.
       console.log(inspect(results, {depth: null}));
     });
 
-    > [ { name: 'my.cool.collector',
+    > [ { name: 'my/cool/collector',
     success: true,
     results: { success: true, stuff: 'and', things: true } },
   { name: 'my.ace.collector',
@@ -33,11 +33,11 @@ Now to use them.
 
 We can filter the things to run:
 
-    collectors.execute('*.cool.*').then(function(results) {
+    collectors.execute('*/cool/*').then(function(results) {
       console.log(inspect(results, {depth: null}));
     });
 
-    > [ { name: 'my.cool.collector',
+    > [ { name: 'my/cool/collector',
     success: true,
     results: { success: true, stuff: 'and', things: true } }
 
@@ -49,4 +49,4 @@ Add the following to your express app
 
 Then hit it:
 
-    curl -k -vv  "http://localhost:4567/status/*status-collector.test*"
+    curl -k -vv  "http://localhost:4567/status/status-collector"

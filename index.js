@@ -102,7 +102,8 @@ StatusCollector.prototype.expressApp = function(glob) {
   });
 
   app.get(/^\/status(\/(.+)?)?$/, function(req, res, next) {
-    var path = req.params[1] || '*';
+    var path = req.params[1] || '';
+    path = path + '*';
     self.execute(path)
     .then(function(results) {
       var status = 200;
