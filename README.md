@@ -40,3 +40,13 @@ We can filter the things to run:
     > [ { name: 'my.cool.collector',
     success: true,
     results: { success: true, stuff: 'and', things: true } }
+
+# Express integration
+
+Add the following to your express app
+
+    myApp.use(collectors.expressApp());
+
+Then hit it:
+
+    curl -k -vv  "http://localhost:4567/status/*status-collector.test*"
