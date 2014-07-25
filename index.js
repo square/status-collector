@@ -89,11 +89,17 @@ StatusCollector.prototype.collectors = function(glob) {
   }
 };
 
-StatusCollector.prototype.expressApp = function(glob) {
-  var app = require('express')(),
-      self = this;
+StatusCollector.prototype.expressApp = function(basePath, expressApp) {
+  var self = this,
+      reg;
 
-  app.get(/^\/status(\/(.+)?)?$/, function(req, res, next) {
+  basePath = basePath || '/status';
+
+  expressApp.get(basePath + '-list', function(req, res, next) {
+    res.json(Object.keys(module.exports._collectors).sort());
+  });
+
+  expressApp.get(new RegExp('^' + basePath + '(\/(.+)?)?$'), function(req, res, next) {
     var path = req.params[1] || '';
     path = path.replace(/\//, '.') + '*';
     self.execute(path)
@@ -104,7 +110,7 @@ StatusCollector.prototype.expressApp = function(glob) {
       res.json(status, results);
     });
   });
-  return app;
+  return expressApp;
 };
 
 module.exports = new StatusCollector();
