@@ -89,4 +89,30 @@ StatusCollector.prototype.collectors = function(glob) {
   }
 };
 
+StatusCollector.prototype.connectApp = function(glob) {
+  var app = require('connect')(),
+      self = this
+
+
+  statusCollector.register('status-collector.test.bad', function() {
+    return { success: false, bad: 'juju' };
+  });
+
+  statusCollector.register('status-collector.test.good', function() {
+    return { success: true, good: 'juju' };
+  });
+
+  app.get(/^\/status(\/(.+)?)?$/, function(req, res, next) {
+    var path = req.params[1] || '*';
+    statusCollector.execute(path)
+    .then(function(results) {
+      var status = 200;
+      if(_.some(results, {'success': false})) status = 500;
+
+      res.json(status, results);
+    });
+  });
+  return app;
+};
+
 module.exports = new StatusCollector();
