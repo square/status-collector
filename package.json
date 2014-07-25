@@ -1,6 +1,6 @@
 {
   "name": "status-collector",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A simple named collector module intended for collection of status on demand for multiple aspects of your application",
   "main": "index.js",
   "scripts": {
