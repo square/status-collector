@@ -93,17 +93,9 @@ StatusCollector.prototype.expressApp = function(glob) {
   var app = require('express')(),
       self = this;
 
-  self.register('status-collector.test.bad', function() {
-    return { success: false, bad: 'juju' };
-  });
-
-  self.register('status-collector.test.good', function() {
-    return { success: true, good: 'juju' };
-  });
-
   app.get(/^\/status(\/(.+)?)?$/, function(req, res, next) {
     var path = req.params[1] || '';
-    path = path + '*';
+    path = path.replace(/\//, '.') + '*';
     self.execute(path)
     .then(function(results) {
       var status = 200;
