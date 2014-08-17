@@ -10,8 +10,13 @@ It allows you to setup topographically named collectors that can be filtered by 
     > Q = require('q');
     > inspect = require('util').inspect;
 
-    collectors.register('my.cool.collector', function() { return { success: true, stuff: 'and', things: true }; });
-    collectors.register('my.ace.collector', function() { return Q().then(function() { return { success: true, woa: 'crazy'}; }); });
+    collectors.register('my.cool.collector', function() { 
+      return { success: true, stuff: 'and', things: true };
+    });
+
+    collectors.register('my.ace.collector', function() { 
+      return Q().then(function() { return { success: true, woa: 'crazy'}; }); 
+    });
 
     > collectors
     <StatusCollector collectors=[my.ace.collector, my.cool.collector]>

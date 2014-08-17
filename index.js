@@ -1,4 +1,4 @@
-var Q = require('q'),
+var Promise = require('bluebird'),
     minimatch = require('minimatch'),
     _ = require('lodash');
 /**
@@ -36,7 +36,7 @@ StatusCollector.prototype.inspect = function() {
 
 Collector.prototype.execute = function() {
   var self = this;
-  return Q().then(function() { return self.fn(); })
+  return Promise.resolve().then(function() { return self.fn(); })
   .then(function(results) {
     var success = true;
 
@@ -69,7 +69,7 @@ StatusCollector.prototype.execute = function(glob) {
       collectors = this.collectors(glob),
       proms = collectors.map(function(c) { return c.execute(); });
 
-  return Q.all(proms);
+  return Promise.all(proms);
 };
 
 
