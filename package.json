@@ -14,7 +14,7 @@
     "status"
   ],
   "dependencies": {
-    "minimatch": "0.4.0",
+    "minimatch": "10.2.1",
     "bluebird": "*",
     "lodash": "*"
   },
